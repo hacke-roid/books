@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function RemoveForm({onSubmit, max }) {
+function RemoveForm({ onSubmit, max }) {
   const [n, setN] = useState(0);
 
   const handleSubmit = (event) => {
@@ -8,11 +8,10 @@ function RemoveForm({onSubmit, max }) {
     onSubmit(n);
   };
 
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Remove At Index</label>
+        <label>Remove At Index :</label>
         <input
           type="number"
           min={0}
