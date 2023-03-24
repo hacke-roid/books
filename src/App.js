@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BookCreate from "./components/BookCreate";
+import RemoveForm from "./components/RemoveForm";
 
 function App() {
   const [book, setBook] = useState([]);
@@ -12,6 +13,13 @@ function App() {
     
   };
 
+  const removeBookAtIndex = (indexToRemove) => {
+    const updatedBook = book.filter((books,index) => {
+      return indexToRemove !== index;
+    });
+    setBook(updatedBook);
+  }
+
   const renderedBook = book.map((books, i)=> {
     return<li key={i}>{books}</li>
   })
@@ -19,9 +27,13 @@ function App() {
   return (
     <div>
       <BookCreate onCreate={createBook}/>
+      
       <ul>
+        
         {renderedBook}
       </ul>
+      <hr />
+      <RemoveForm onSubmit={removeBookAtIndex} max={book.length}/>
     </div>
   );
 }
