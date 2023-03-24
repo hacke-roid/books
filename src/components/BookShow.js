@@ -1,6 +1,6 @@
 function BookShow() {
     return(
-        <div>BookList</div>
+        <div>BookShow</div>
     )
 };
 

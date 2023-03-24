@@ -6,15 +6,22 @@ function App() {
 
   const createBook = (title) => {
     
-    setBook(title);
+    const updatedTitle = [ ...book, title];
+    setBook(updatedTitle);
     console.log("Book name is", title);
     
   };
 
+  const renderedBook = book.map((books, i)=> {
+    return<li key={i}>{books}</li>
+  })
+
   return (
     <div>
       <BookCreate onCreate={createBook}/>
-      <div>Hello</div>
+      <ul>
+        {renderedBook}
+      </ul>
     </div>
   );
 }
