@@ -1,35 +1,43 @@
 import { useState } from "react";
 import BookCreate from "./components/BookCreate";
-import RemoveForm from "./components/RemoveForm";
+
+import BookList from "./components/BookList";
 
 function App() {
-  const [book, setBook] = useState([]);
+  const [books, setBook] = useState([]);
+
+  const deleteBookById = (id) => {
+    const updatedBooks = books.filter((book) => {
+      return book.id !== id;
+    });
+    setBook(updatedBooks);
+  };
+
+  const editBookById = (id, newTitle) => {
+    const updatedBooks = books.map((book) => {
+      if (book.id === id) {
+        return { ...book, title: newTitle };
+      }
+      return book;
+    });
+
+    setBook(updatedBooks);
+  };
 
   const createBook = (title) => {
-    const updatedTitle = [...book, title];
+    const updatedTitle = [
+      ...books,
+      { id: Math.round(Math.random() * 9999), title },
+    ];
     setBook(updatedTitle);
     console.log("Book name is", title);
   };
 
-  const removeBookAtIndex = (indexToRemove) => {
-    const updatedBook = book.filter((books, index) => {
-      return indexToRemove !== index;
-    });
-    setBook(updatedBook);
-  };
-
-  const renderedBook = book.map((books, i) => {
-    return <li key={i}>{books}</li>;
-  });
-
   return (
-    <div>
-      <h3>Adding Books</h3>
+    <div className="app">
+    <h1>Reading List</h1>
+      <BookList books={books} onDelete={deleteBookById} onEdit={editBookById} />
       <BookCreate onCreate={createBook} />
-
-      <ul>{renderedBook}</ul>
-      <hr />
-      <RemoveForm onSubmit={removeBookAtIndex} max={book.length} />
     </div>
   );
 }
