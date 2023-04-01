@@ -5,7 +5,7 @@ function BookCreate({ onCreate }) {
   
   const handleChange = (event) => {
     setTitle(event.target.value);
-    console.log('event')
+    console.log('event');
   }
 
   const handleSubmit = (event) => {
